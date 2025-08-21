@@ -56,8 +56,8 @@ function App() {
     setTimeout(() => {
       setSortedGender(
         (random === 0 && "boy") ||
-          (random === 1 && "girl") ||
-          (random === 2 && "twins")
+        (random === 1 && "girl") ||
+        (random === 2 && "twins")
       );
 
       random === 0 && setCountBoy(countBoy + 1);
@@ -66,7 +66,7 @@ function App() {
 
       handleUser();
       setLoading(false);
-    }, 5000);
+    }, 8000);
   };
 
   //SALVAR USUÁRIO
@@ -98,20 +98,20 @@ function App() {
 
     setGender(
       (countBoy > countGirl && countBoy > countTwins && "Menino") ||
-        (countGirl > countBoy && countGirl > countTwins && "Menina") ||
-        (countTwins > countBoy && countTwins > countGirl && "Gêmeos") ||
-        (countBoy == countGirl &&
-          countBoy > countTwins &&
-          "Empate Menino e Menina") ||
-        (countBoy == countTwins &&
-          countBoy > countGirl &&
-          "Empate Menino e Gêmeos") ||
-        (countGirl == countTwins &&
-          countGirl > countBoy &&
-          "Empate Menina e Gêmeos") ||
-        (countBoy == countGirl &&
-          countBoy === countTwins &&
-          "Empate Menino, Menina e Gêmeos")
+      (countGirl > countBoy && countGirl > countTwins && "Menina") ||
+      (countTwins > countBoy && countTwins > countGirl && "Gêmeos") ||
+      (countBoy == countGirl &&
+        countBoy > countTwins &&
+        "Empate Menino e Menina") ||
+      (countBoy == countTwins &&
+        countBoy > countGirl &&
+        "Empate Menino e Gêmeos") ||
+      (countGirl == countTwins &&
+        countGirl > countBoy &&
+        "Empate Menina e Gêmeos") ||
+      (countBoy == countGirl &&
+        countBoy === countTwins &&
+        "Empate Menino, Menina e Gêmeos")
     );
   }, [sortedGender]);
 
@@ -128,7 +128,7 @@ function App() {
           alt="little prince logo"
         />
 
-        <h1>Guess Baby Di</h1>
+        <h1>Previsão do Baby Di</h1>
       </header>
 
       <div className="card">
@@ -169,43 +169,54 @@ function App() {
           <div>
             <br />
             <br />
-            <h4>
+            <h1>
               Olá,
-              <span style={{ color: "rgb(216, 252, 253)" }} className="user-name"> {name} </span>!
-              <br />
-              <p>Clique para fazer sua previsão</p>
-            </h4>
+              <span style={{ color: "rgba(233, 200, 54, 1)" }} className="user-name"> {name} </span>!
+
+            </h1>
+
+            <h2>Clique para fazer sua previsão</h2>
+
             <br />
             <br />
-            <img src="tap.png" width={50} alt="" className="pointer" onClick={handleGenerate}/>
+            <br />
+
+            <img src="tap.png" width={50} alt="" className="pointer" onClick={handleGenerate} />
 
             <br />
             <br />
 
-            
+
           </div>
         )}
       </div>
 
-      {message && <h3 className="message">{message}</h3>}
+      {message && <h2 className="message">{message}</h2>}
 
       {loading && (
         <div>
           <img src="littleprince4.png" alt="" className="logo loading" />
           <div className="melting-text-container">
-            <p className="melting-text">Consultando os astros ...</p>
+            <h2 className="melting-text">Consultando os astros...</h2>
           </div>
         </div>
       )}
 
       {sortedGender && (
+
+
         <div>
-          <h3 className="message">
+          <h1 style={{ color: 'rgba(233, 200, 54, 1)' }}>Pela sua Previsão...</h1>
+          <br />
+
+          <h2>
             Vai ser{" "}
             {(sortedGender === "boy" && <span>um</span>) ||
               (sortedGender === "girl" && <span>uma</span>)}
-          </h3>
-          <br />
+          </h2>
+
+          <br /><br />
+
           <img
             src={`${sortedGender}.png`}
             className={sortedGender}
@@ -213,17 +224,16 @@ function App() {
             alt={sortedGender}
           />
 
+          <br /><br />
+
+          {sortedGender === "boy" && <h2 className="Menino">Menino !</h2>}
+          {sortedGender === "girl" && <h2 className="Menina">Menina !</h2>}
+          {sortedGender === "twins" && <h2 className="Gêmeos">Gêmeos</h2>}
+
+          <br />
           <br />
 
-          {sortedGender === "boy" && <h4>Menino</h4>}
-          {sortedGender === "girl" && <h4>Menina</h4>}
-          {sortedGender === "twins" && <h4>Gêmeos</h4>}
 
-          <br />
-          <br />
-          <br />
-
-          <h3>Obrigado por participar !</h3>
         </div>
       )}
 
@@ -231,33 +241,52 @@ function App() {
       <br />
       <br />
 
-      {sortedGender && (
-        <>
-          <button onClick={handleReset} id="reset-btn">
-            Concluído
-          </button>
-        </>
-      )}
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
 
       {sortedGender && (
         <div>
-          <h3 className="result">
+          <h2 className="result">
             Resultado Parcial: <span className={gender}>{gender}</span>
-          </h3>
+          </h2>
 
+          <br />
           <br />
           <br />
 
           <hr />
 
-          <p>
+          <h3 className="read-the-docs">Últimas Previsões</h3>
+
+          <br />
+
+          {array && (
+            <div>
+              {array.map(
+                (v, i) =>
+                  i > array.length - 6 && (
+                    <div key={i} className="user-data">
+                      <div className="user-name">{v.name}</div> <div className="separator"> - </div>
+                      <div className="user-guess">
+                        {(v.sortedGender === "boy" && (
+                          <div className="Menino">Menino</div>
+                        )) ||
+                          (v.sortedGender === "girl" && (
+                            <div className="Menina">Menina</div>
+                          )) ||
+                          (v.sortedGender === "twins" && (
+                            <div className="Gêmeos">Gêmeos</div>
+                          ))}
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
+          )}
+
+
+          <br />
+          <hr />
+
+          <h3>
             <span>
               &nbsp; Menino:{" "}
               <span style={{ color: "yellow" }}> {countBoy} </span>
@@ -270,40 +299,36 @@ function App() {
             <span>
               Gêmeos: <span style={{ color: "yellow" }}> {countTwins} </span>
             </span>
-          </p>
+          </h3>
 
-          <br />
-          <br />
+          
 
-          <p className="read-the-docs">Últimas Previsões</p>
 
-          {array && (
-            <div>
-              {array.map(
-                (v, i) =>
-                  i < 5 && (
-                    <div key={i} className="user-data">
-                      <div className="user-name">{v.name}</div> <div className="separator"> - </div>
-                      <div className="user-guess">
-                        {(v.sortedGender === "boy" && (
-                          <div className="Menino">'Menino'</div>
-                        )) ||
-                          (v.sortedGender === "girl" && (
-                            <div className="Menina">'Menina'</div>
-                          )) ||
-                          (v.sortedGender === "twins" && (
-                            <div className="Gêmeos">'Gêmeos'</div>
-                          ))}
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-          )}
         </div>
+
+
+
+
       )}
 
+
       <br />
+      <br />
+
+      {sortedGender && (
+        <>
+          <button onClick={handleReset} id="reset-btn">
+            Concluído
+          </button>
+        </>
+      )}
+
+      
+
+
+      <footer>
+        <h4>&copy; 2025</h4>
+      </footer>
     </>
   );
 }
